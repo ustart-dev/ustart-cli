@@ -14,4 +14,7 @@
   ],
   "author": "Leonel Peña <leonel@ustart.dev>",
   "license": "MIT",
+  "dependencies": {
+    "yargs": "^13.2.2"
+  }
 }
