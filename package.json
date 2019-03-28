@@ -1,0 +1,17 @@
+{
+  "name": "ustart-cli",
+  "version": "1.0.0",
+  "description": "uStart command line",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ustart",
+    "ustart framework",
+    "command line",
+    "graphql"
+  ],
+  "author": "Leonel Peña <leonel@ustart.dev>",
+  "license": "MIT",
+}
