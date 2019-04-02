@@ -16,4 +16,5 @@ exports.handler = function (argv) {
   files.createPackageJson('./', path.basename(process.cwd()));
   execSync('npm install', { stdio: 'inherit' });
   execSync('cp -R ./node_modules/ustart/template/. ./', { stdio: 'inherit' });
+  execSync('mv gitignore .gitignore', { stdio: 'inherit' });
 };
