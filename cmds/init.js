@@ -17,4 +17,5 @@ exports.handler = function (argv) {
   execSync('npm install', { stdio: 'inherit' });
   execSync('cp -R ./node_modules/ustart/template/. ./', { stdio: 'inherit' });
   execSync('mv gitignore .gitignore', { stdio: 'inherit' });
+  execSync('mv env .env', { stdio: 'inherit' });
 };
