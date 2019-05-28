@@ -1,6 +1,6 @@
 # ustart-cli
 
-The uStart CLI.
+The uStart CLI. See the docs: https://ustart.dev.
 
 ## Installation
 
@@ -29,4 +29,5 @@ $ ustart init
 $ ustart --help
 $ ustart --version
 $ ustart init
+$ ustart build [options]
 ```
