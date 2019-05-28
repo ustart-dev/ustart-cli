@@ -17,6 +17,14 @@
   ],
   "author": "Leonel Peña <leonel@ustart.dev>",
   "license": "MIT",
+  "homepage": "https://ustart.dev/docs/commands",
+  "bugs": {
+    "url": "https://github.com/ustart-dev/ustart-cli/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ustart-dev/ustart-cli.git"
+  },
   "dependencies": {
     "yargs": "^13.2.2"
   }
