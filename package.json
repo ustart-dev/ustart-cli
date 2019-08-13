@@ -26,6 +26,6 @@
     "url": "https://github.com/ustart-dev/ustart-cli.git"
   },
   "dependencies": {
-    "yargs": "^13.2.2"
+    "yargs": "^13.3.0"
   }
 }
