@@ -5,6 +5,8 @@
 ### Current changes (1.x.y)
 
 - Added LICENSE, COLLABORATORS and CHANGELOG files
+- Fix: added config folder to packing list.
+- Feat: Added ustart-script in replace for ustart package.
 
 ### 1.1.1
 
