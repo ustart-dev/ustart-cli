@@ -26,6 +26,8 @@
     "url": "https://github.com/ustart-dev/ustart-cli.git"
   },
   "dependencies": {
+    "dotenv": "^8.1.0",
+    "sequelize-cli": "^5.5.0",
     "yargs": "^13.3.0"
   }
 }
