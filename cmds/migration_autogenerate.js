@@ -13,6 +13,10 @@ exports.builder = yargs =>
   }).argv;
 exports.handler = function(argv) {
   execSync(
+    `${cmds.npmRunBuild}`,
+    { stdio: 'inherit' }
+  );
+  execSync(
     `${cmds.sequelizeAutoMigration} --ustart-models --name "${argv.name}"`,
     { stdio: 'inherit' }
   );
