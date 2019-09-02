@@ -1,12 +1,6 @@
 # ustart-cli
 
-The uStart CLI. See the docs: https://ustart.dev.
-
-## Installation
-
-```
-$ npm install -g ustart-cli
-```
+The uStart CLI. See the docs: https://ustart.dev/docs/next/installation.
 
 ## Getting started
 
@@ -20,14 +14,17 @@ $ cd your-awesome-project
 Then, initialize it with *ustart-cli*:
 
 ```
-$ ustart init
+$ npx ustart-cli@alpha init
 ```
+
+> Note that the above instruction uses the alpha version.
 
 ## Usage
 
 ```
-$ ustart --help
-$ ustart --version
-$ ustart init
-$ ustart build [options]
+$ npx ustart --help
+$ npx ustart --version
+$ npx ustart build [options]
+$ npx ustart db:migrate
+$ npx ustart migration:autogenerate --name "migration-name"
 ```
