@@ -1,6 +1,6 @@
 # ustart-cli
 
-The uStart CLI. See the docs: https://ustart.dev/docs/next/installation.
+The uStart CLI. See the docs: https://ustart.dev/docs/installation.
 
 ## Getting started
 
@@ -14,10 +14,8 @@ $ cd your-awesome-project
 Then, initialize it with *ustart-cli*:
 
 ```
-$ npx ustart-cli@alpha init
+$ npx ustart-cli init
 ```
-
-> Note that the above instruction uses the alpha version.
 
 ## Usage
 
