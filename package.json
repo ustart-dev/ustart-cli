@@ -1,6 +1,6 @@
 {
   "name": "ustart-cli",
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0",
   "description": "The uStart CLI",
   "main": "index.js",
   "scripts": {
