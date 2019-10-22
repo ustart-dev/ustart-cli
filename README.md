@@ -4,20 +4,16 @@ The uStart CLI. See the docs: https://ustart.dev/docs/installation.
 
 ## Getting started
 
-First, create a new folder with your project's name:
+Start a new project is easy with *ustart-cli*:
 
 ```
-$ mkdir your-awesome-project
-$ cd your-awesome-project
-```
-
-Then, initialize it with *ustart-cli*:
-
-```
-$ npx ustart-cli init
+$ npx ustart-cli init MyNewProject
+$ cd MyNewProject && npm start
 ```
 
 ## Usage
+
+After initialize a project using *init* command, the cli will be available locally:
 
 ```
 $ npx ustart --help
