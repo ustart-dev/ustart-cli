@@ -11,6 +11,7 @@ This is the log of notable changes to the ustart-cli package.
 ### 🎉 New features
 
 - Added 'project name' argument to *init* command
+- Added optional argument mongoose to *init* command
 
 ### 🐛 Bug fixes
 

@@ -11,14 +11,21 @@ const path = require('path');
 const files = require('../lib/files');
 const execSync = require('child_process').execSync;
 
-exports.command = "init [project-name]";
+exports.command = "init [project-name] [mongoose]";
 exports.desc =
   "Initializes a new backend project based on uStart framework";
 exports.builder = yargs =>
-  yargs.positional("project-name", {
+  yargs
+  .positional("project-name", {
     describe: "Name of the project's folder",
     type: "string",
-  }).argv;
+  })
+  .positional("mongoose", {
+    describe: "Set to install mongoose during initialization",
+    type: "boolean",
+    default: false
+  })
+  .argv;
 exports.handler = function(argv) {
   const parsedPath = path.parse(argv.projectName || process.cwd());
   let dir;
@@ -33,6 +40,9 @@ exports.handler = function(argv) {
 
   files.createPackageJson(dir, base);
   execSync(`cd ${dir} && npm install`, { stdio: 'inherit' });
+  if (argv.mongoose) {
+    execSync(`cd ${dir} && npm install mongoose`, { stdio: 'inherit' });
+  }
   execSync(`cd ${dir} && cp -R ./node_modules/ustart-scripts/template/. ./`, { stdio: 'inherit' });
   execSync(`cd ${dir} && mv gitignore .gitignore`, { stdio: 'inherit' });
   execSync(`cd ${dir} && mv env .env`, { stdio: 'inherit' });
