@@ -8,10 +8,11 @@ Command:
      5.- Copies ustart template's content into the current directory
 */
 const path = require('path');
-const files = require('../lib/files');
 const execSync = require('child_process').execSync;
+const files = require('../lib/files');
+const cmds = require("../lib/cmds");
 
-exports.command = "init [project-name] [mongoose]";
+exports.command = "init [project-name] [mongoose] [sequelize]";
 exports.desc =
   "Initializes a new backend project based on uStart framework";
 exports.builder = yargs =>
@@ -22,6 +23,11 @@ exports.builder = yargs =>
   })
   .positional("mongoose", {
     describe: "Set to install mongoose during initialization",
+    type: "boolean",
+    default: false
+  })
+  .positional("sequelize", {
+    describe: "Set to install sequelize during initialization",
     type: "boolean",
     default: false
   })
@@ -42,6 +48,9 @@ exports.handler = function(argv) {
   execSync(`cd ${dir} && npm install`, { stdio: 'inherit' });
   if (argv.mongoose) {
     execSync(`cd ${dir} && npm install mongoose`, { stdio: 'inherit' });
+  }
+  if (argv.sequelize) {
+    execSync(`cd ${dir} && ${cmds.installAllSequelize}`, { stdio: 'inherit' });
   }
   execSync(`cd ${dir} && cp -R ./node_modules/ustart-scripts/template/. ./`, { stdio: 'inherit' });
   execSync(`cd ${dir} && mv gitignore .gitignore`, { stdio: 'inherit' });
