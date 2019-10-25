@@ -29,10 +29,17 @@ const promptNonSetValues = async function(argv) {
       message: 'Are you going to use PostgreSQL, MariaDB, MySQL or SQLite?'
     }));
   }
+  if (typeof argv.shield === 'undefined') {
+    Object.assign(result, await prompt({
+      type: 'confirm',
+      name: 'shield',
+      message: 'Are you going to use the permission layer?'
+    }));
+  }
   return result;
 }
 
-exports.command = "init [project-name] [mongoose] [sequelize]";
+exports.command = "init [project-name] [mongoose] [sequelize] [shield]";
 exports.desc =
   "Initializes a new backend project based on uStart framework";
 exports.builder = yargs =>
@@ -47,6 +54,10 @@ exports.builder = yargs =>
   })
   .positional("sequelize", {
     describe: "Set to install sequelize during initialization",
+    type: "boolean"
+  })
+  .positional("shield", {
+    describe: "Set to install graphql-shield during initialization",
     type: "boolean"
   })
   .middleware(promptNonSetValues)
@@ -70,6 +81,9 @@ exports.handler = function(argv) {
   }
   if (argv.sequelize) {
     execSync(`cd ${dir} && ${cmds.installAllSequelize}`, { stdio: 'inherit' });
+  }
+  if (argv.shield) {
+    execSync(`cd ${dir} && npm install graphql-shield`, { stdio: 'inherit' });
   }
   execSync(`cd ${dir} && cp -R ./node_modules/ustart-scripts/template/. ./`, { stdio: 'inherit' });
   execSync(`cd ${dir} && mv gitignore .gitignore`, { stdio: 'inherit' });

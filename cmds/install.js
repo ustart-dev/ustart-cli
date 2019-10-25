@@ -9,7 +9,7 @@ exports.builder = yargs =>
   .positional("package", {
     describe: "Package name",
     type: "string",
-    choices: ["sequelize", "mongoose"]
+    choices: ["sequelize", "mongoose", "graphql-shield"]
   })
   .argv;
 exports.handler = function(argv) {
@@ -17,5 +17,7 @@ exports.handler = function(argv) {
     execSync(`${cmds.installAllSequelize}`, { stdio: 'inherit' });
   } else if (argv.package === "mongoose") {
     execSync(`npm install mongoose`, { stdio: 'inherit' });
+  } else if (argv.package === "graphql-shield") {
+    execSync(`npm install graphql-shield`, { stdio: 'inherit' });
   }
 };

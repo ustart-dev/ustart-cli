@@ -15,6 +15,7 @@ This is the log of notable changes to the ustart-cli package.
 - Added optional argument sequelize to *init* command
 - Added *install* command
 - Added enquirer package to prompt for non set arguments on *init* command
+- Added optional argument shield (graphql-shield) to *init* command
 
 ### 🐛 Bug fixes
 
