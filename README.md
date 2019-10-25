@@ -13,6 +13,12 @@ $ cd MyNewProject && npm start
 
 ## Usage
 
+*init* command usage:
+
+```
+$ npx ustart-cli init [project-name] [--mongoose | --no-mongoose] [--sequelize | --no-sequelize]
+```
+
 After initialize a project using *init* command, the cli will be available locally:
 
 ```

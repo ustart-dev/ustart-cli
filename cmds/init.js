@@ -9,8 +9,28 @@ Command:
 */
 const path = require('path');
 const execSync = require('child_process').execSync;
+const { prompt } = require('enquirer');
 const files = require('../lib/files');
 const cmds = require("../lib/cmds");
+
+const promptNonSetValues = async function(argv) {
+  let result = {};
+  if (typeof argv.mongoose === 'undefined') {
+    Object.assign(result, await prompt({
+      type: 'confirm',
+      name: 'mongoose',
+      message: 'Are you going to use MongoDB?'
+    }));
+  }
+  if (typeof argv.sequelize === 'undefined') {
+    Object.assign(result, await prompt({
+      type: 'confirm',
+      name: 'sequelize',
+      message: 'Are you going to use PostgreSQL, MariaDB, MySQL or SQLite?'
+    }));
+  }
+  return result;
+}
 
 exports.command = "init [project-name] [mongoose] [sequelize]";
 exports.desc =
@@ -19,18 +39,17 @@ exports.builder = yargs =>
   yargs
   .positional("project-name", {
     describe: "Name of the project's folder",
-    type: "string",
+    type: "string"
   })
   .positional("mongoose", {
     describe: "Set to install mongoose during initialization",
-    type: "boolean",
-    default: false
+    type: "boolean"
   })
   .positional("sequelize", {
     describe: "Set to install sequelize during initialization",
-    type: "boolean",
-    default: false
+    type: "boolean"
   })
+  .middleware(promptNonSetValues)
   .argv;
 exports.handler = function(argv) {
   const parsedPath = path.parse(argv.projectName || process.cwd());

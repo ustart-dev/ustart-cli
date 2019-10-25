@@ -14,6 +14,7 @@ This is the log of notable changes to the ustart-cli package.
 - Added optional argument mongoose to *init* command
 - Added optional argument sequelize to *init* command
 - Added *install* command
+- Added enquirer package to prompt for non set arguments on *init* command
 
 ### 🐛 Bug fixes
 
