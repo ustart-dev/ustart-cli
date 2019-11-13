@@ -88,4 +88,5 @@ exports.handler = function(argv) {
   execSync(`cd ${dir} && cp -R ./node_modules/ustart-scripts/template/. ./`, { stdio: 'inherit' });
   execSync(`cd ${dir} && mv gitignore .gitignore`, { stdio: 'inherit' });
   execSync(`cd ${dir} && mv env .env`, { stdio: 'inherit' });
+  execSync(`cd ${dir} && mv dockerignore .dockerignore`, { stdio: 'inherit' });
 };
