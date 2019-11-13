@@ -17,6 +17,7 @@ This is the log of notable changes to the ustart-cli package.
 - Added enquirer package to prompt for non set arguments on *init* command
 - Added optional argument shield (graphql-shield) to *init* command
 - Added docker support
+- Added support for linting and formatting into package.json (generated project)
 
 ### 🐛 Bug fixes
 
