@@ -1,15 +1,7 @@
-/**
-Command:
-  $ ustart init
-     1.- Creates the project folder if requested
-     2.- Checks that package.json does not exists, if so it throws an error and exit
-     3.- Creates a package.json
-     4.- Installs all NPM dependencies
-     5.- Copies ustart template's content into the current directory
-*/
 const path = require('path');
 const execSync = require('child_process').execSync;
 const { prompt } = require('enquirer');
+const fse = require('fs-extra');
 const files = require('../lib/files');
 const cmds = require("../lib/cmds");
 
@@ -39,15 +31,11 @@ const promptNonSetValues = async function(argv) {
   return result;
 }
 
-exports.command = "init [project-name] [mongoose] [sequelize] [shield]";
+exports.command = "init <projectName> [mongoose] [sequelize] [shield]";
 exports.desc =
   "Initializes a new backend project based on uStart framework";
 exports.builder = yargs =>
   yargs
-  .positional("project-name", {
-    describe: "Name of the project's folder",
-    type: "string"
-  })
   .positional("mongoose", {
     describe: "Set to install mongoose during initialization",
     type: "boolean"
@@ -63,30 +51,43 @@ exports.builder = yargs =>
   .middleware(promptNonSetValues)
   .argv;
 exports.handler = function(argv) {
-  const parsedPath = path.parse(argv.projectName || process.cwd());
-  let dir;
-  const base = parsedPath.base;
+  const fullPath = path.join(process.cwd(), argv.projectName);
+  const parsedPath = path.parse(fullPath);
 
-  if (argv.projectName) {
-    dir = path.join(parsedPath.dir || '.', base);
-    files.createFolder(argv.projectName);
-  } else {
-    dir = '.';
+  if (parsedPath.ext !== '') {
+    throw new Error('Project name cannot contain an extension');
   }
 
-  files.createPackageJson(dir, base);
-  execSync(`cd ${dir} && npm install`, { stdio: 'inherit' });
+  fse.ensureDirSync(fullPath);
+  files.createPackageJson(fullPath, parsedPath.name);
+
+  const options = { stdio: 'inherit', cwd: fullPath };
+
+  execSync('npm install', options);
   if (argv.mongoose) {
-    execSync(`cd ${dir} && npm install mongoose`, { stdio: 'inherit' });
+    execSync('npm install mongoose', options);
   }
   if (argv.sequelize) {
-    execSync(`cd ${dir} && ${cmds.installAllSequelize}`, { stdio: 'inherit' });
+    execSync(cmds.installAllSequelize, options);
   }
   if (argv.shield) {
-    execSync(`cd ${dir} && npm install graphql-shield`, { stdio: 'inherit' });
+    execSync('npm install graphql-shield', options);
   }
-  execSync(`cd ${dir} && cp -R ./node_modules/ustart-scripts/template/. ./`, { stdio: 'inherit' });
-  execSync(`cd ${dir} && mv gitignore .gitignore`, { stdio: 'inherit' });
-  execSync(`cd ${dir} && mv env .env`, { stdio: 'inherit' });
-  execSync(`cd ${dir} && mv dockerignore .dockerignore`, { stdio: 'inherit' });
+
+  fse.copySync(
+    path.join(fullPath, 'node_modules/ustart-scripts/template'),
+    path.join(fullPath, '/')
+  );
+  fse.moveSync(
+    path.join(fullPath, 'gitignore'),
+    path.join(fullPath, '.gitignore')
+  );
+  fse.moveSync(
+    path.join(fullPath, 'env'),
+    path.join(fullPath, '.env')
+  );
+  fse.moveSync(
+    path.join(fullPath, 'dockerignore'),
+    path.join(fullPath, '.dockerignore')
+  );
 };
