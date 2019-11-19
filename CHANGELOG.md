@@ -18,7 +18,8 @@ This is the log of notable changes to the ustart-cli package.
 - Added optional argument shield (graphql-shield) to *init* command
 - Added docker support
 - Added support for linting and formatting into package.json (generated project)
-- Improve Windows support to *init* command
+- Improved Windows support to *init* command
+- Added optional arguments '--assumeyes' and '--assumeno' to *init* command
 
 ### 🐛 Bug fixes
 

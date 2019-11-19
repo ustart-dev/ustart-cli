@@ -6,7 +6,25 @@ const files = require('../lib/files');
 const cmds = require("../lib/cmds");
 
 const promptNonSetValues = async function(argv) {
+
+  if (argv.assumeyes) {
+    return {
+      mongoose: true,
+      sequelize: true,
+      shield: true
+    };
+  }
+
+  if (argv.assumeno) {
+    return {
+      mongoose: false,
+      sequelize: false,
+      shield: false
+    };
+  }
+
   let result = {};
+
   if (typeof argv.mongoose === 'undefined') {
     Object.assign(result, await prompt({
       type: 'confirm',
@@ -31,7 +49,7 @@ const promptNonSetValues = async function(argv) {
   return result;
 }
 
-exports.command = "init <projectName> [mongoose] [sequelize] [shield]";
+exports.command = "init <projectName> [mongoose] [sequelize] [shield] [assumeyes] [assumeno]";
 exports.desc =
   "Initializes a new backend project based on uStart framework";
 exports.builder = yargs =>
@@ -46,6 +64,16 @@ exports.builder = yargs =>
   })
   .positional("shield", {
     describe: "Set to install graphql-shield during initialization",
+    type: "boolean"
+  })
+  .positional("assumeyes", {
+    describe: "Assume yes; assume that the answer to any question which would be asked is yes",
+    alias: "y",
+    type: "boolean"
+  })
+  .positional("assumeno", {
+    describe: "Assume no; assume that the answer to any question which would be asked is no",
+    alias: "n",
     type: "boolean"
   })
   .middleware(promptNonSetValues)
