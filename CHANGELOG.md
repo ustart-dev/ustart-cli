@@ -22,6 +22,8 @@ This is the log of notable changes to the ustart-cli package.
 
 ### 🐛 Bug fixes
 
+- Fixed nodemon reload against changes at config folder and graphql files
+
 ## 2.0
 
 ### 🛠 Breaking changes
