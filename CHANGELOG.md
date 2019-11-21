@@ -20,7 +20,7 @@ This is the log of notable changes to the ustart-cli package.
 - Added support for linting and formatting into package.json (generated project)
 - Improved Windows support to *init* command
 - Added optional arguments '--assumeyes' and '--assumeno' to *init* command
-- Added optional argument '--git' to *init* command
+- Added optional argument '--gitinit' to *init* command
 
 ### 🐛 Bug fixes
 
