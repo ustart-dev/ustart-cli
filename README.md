@@ -16,7 +16,7 @@ $ cd MyNewProject && npm start
 *init* command usage:
 
 ```
-$ npx ustart-cli init [project-name] [--mongoose | --no-mongoose] [--sequelize | --no-sequelize] [--shield | --no-shield] [--assumeyes, --y] [--assumeno, --n]
+$ npx ustart-cli init [project-name] [--mongoose | --no-mongoose] [--sequelize | --no-sequelize] [--shield | --no-shield] [--git | --no-git] [--assumeyes, --y] [--assumeno, --n]
 ```
 
 After initialize a project using *init* command, the cli will be available locally:

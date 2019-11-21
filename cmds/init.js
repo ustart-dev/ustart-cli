@@ -11,7 +11,8 @@ const promptNonSetValues = async function(argv) {
     return {
       mongoose: true,
       sequelize: true,
-      shield: true
+      shield: true,
+      git: true
     };
   }
 
@@ -19,7 +20,8 @@ const promptNonSetValues = async function(argv) {
     return {
       mongoose: false,
       sequelize: false,
-      shield: false
+      shield: false,
+      git: false
     };
   }
 
@@ -46,10 +48,17 @@ const promptNonSetValues = async function(argv) {
       message: 'Are you going to use the permission layer?'
     }));
   }
+  if (typeof argv.git === 'undefined') {
+    Object.assign(result, await prompt({
+      type: 'confirm',
+      name: 'git',
+      message: 'Do we init a git repository for you?'
+    }));
+  }
   return result;
 }
 
-exports.command = "init <projectName> [mongoose] [sequelize] [shield] [assumeyes] [assumeno]";
+exports.command = "init <projectName> [mongoose] [sequelize] [shield] [git] [assumeyes] [assumeno]";
 exports.desc =
   "Initializes a new backend project based on uStart framework";
 exports.builder = yargs =>
@@ -64,6 +73,10 @@ exports.builder = yargs =>
   })
   .positional("shield", {
     describe: "Set to install graphql-shield during initialization",
+    type: "boolean"
+  })
+  .positional("git", {
+    describe: "Set to init the project as a git repository",
     type: "boolean"
   })
   .positional("assumeyes", {
@@ -90,6 +103,10 @@ exports.handler = function(argv) {
   files.createPackageJson(fullPath, parsedPath.name);
 
   const options = { stdio: 'inherit', cwd: fullPath };
+
+  if (argv.git) {
+    execSync('git init .', options);
+  }
 
   execSync('npm install', options);
   if (argv.mongoose) {
