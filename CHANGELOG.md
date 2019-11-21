@@ -8,6 +8,8 @@ This is the log of notable changes to the ustart-cli package.
 
 ### 🛠 Breaking changes
 
+- Migrated to babel v7.7 (generated project)
+
 ### 🎉 New features
 
 - Added 'project name' argument to *init* command
